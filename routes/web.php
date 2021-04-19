@@ -23,3 +23,6 @@ Route::get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->na
 Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 
 Route::resource('users', 'UsersController', ['only' => ['show', 'update', 'edit']]);
+
+Route::get('banner', 'BannersController@showBanner')->name('showBanner');
+Route::post('banner', 'BannersController@setBanner')->name('setBanner');
