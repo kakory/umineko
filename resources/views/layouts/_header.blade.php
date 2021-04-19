@@ -10,14 +10,15 @@
 		<!-- Left Side Of Navbar -->
 		<ul class="navbar-nav mr-auto">
 	
+			<li class="nav-item"><a class="nav-link" href="{{ route('login') }}">报名管理</a></li>
 		</ul>
 	
 		<!-- Right Side Of Navbar -->
 		<ul class="navbar-nav navbar-right">
 			<!-- Authentication Links -->
 			@guest
-			<li class="nav-item"><a class="nav-link" href="#">登录</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">注册</a></li>
+			<li class="nav-item"><a class="nav-link" href="{{ route('login') }}">登录</a></li>
+			<li class="nav-item"><a class="nav-link" href="{{ route('register') }}">注册</a></li>
 			@else
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -29,7 +30,7 @@
 				<a class="dropdown-item" href="">编辑资料</a>
 				<div class="dropdown-divider"></div>
 				<a class="dropdown-item" id="logout" href="#">
-					<form action="#" method="POST">
+					<form action="{{ route('logout') }}" method="POST">
 					{{ csrf_field() }}
 					<button class="btn btn-block btn-danger" type="submit" name="button">退出</button>
 					</form>
