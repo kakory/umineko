@@ -8,12 +8,37 @@ use App\Handlers\ImageUploadHandler;
 
 class BannersController extends Controller
 {
-    public function showBanner()
+    public function index()
     {
-        return view('pages.banner');
+        $banners = Banner::paginate(1);
+        return view('banners.index', compact('banners'));
     }
 
-    public function setBanner(Request $request, ImageUploadHandler $uploader, Banner $banner)
+    public function create()
+    {
+        return view('banners.create');
+    }
+
+    public function store(Request $request, ImageUploadHandler $uploader, Banner $banner)
+    {
+        if ($request->pic) {
+            $result = $uploader->save($request->pic, 'banners', 'bn');
+            if ($result) {
+                $banner = Banner::create([
+                    'url' => $result['path']
+                ]);
+                return redirect()->route('banners.index')->with('success', '上传成功！');
+            }
+        }
+        return redirect()->route('banners.index')->with('danger', '上传失败！');
+    }
+
+    public function edit(Banner $banner)
+    {
+        return view('banners.edit', compact('banner'));
+    }
+
+    public function update(Request $request, ImageUploadHandler $uploader, Banner $banner)
     {
         $data = $request->all();
 
@@ -25,6 +50,13 @@ class BannersController extends Controller
         }
 
         $banner->update($data);
-        return redirect()->route('showBanner')->with('success', '上传成功！');;
+        return redirect()->route('banners.index')->with('success', 'banner更新成功！');
+    }
+
+    public function destroy(Banner $banner)
+    {
+        $banner->delete();
+        session()->flash('success', '成功删除banner！');
+        return back();
     }
 }
