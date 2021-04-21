@@ -3,13 +3,13 @@
 
 @section('content')
 <div class="container">
-    <div class="col-md-8 offset-md-2">
-        <a href="{{ route('banners.create') }}">新建banner</a>
-    </div>
-
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#create">
+        新建Banner
+    </button>
+    @include('banners._create')
     <div class="list-group list-group-flush">
         @foreach ($banners as $banner)
-        @include('banners._banner')
+            @include('banners._banner')
         @endforeach
     </div>
     <div class="mt-3">

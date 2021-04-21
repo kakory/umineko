@@ -14,11 +14,6 @@ class BannersController extends Controller
         return view('banners.index', compact('banners'));
     }
 
-    public function create()
-    {
-        return view('banners.create');
-    }
-
     public function store(Request $request, ImageUploadHandler $uploader, Banner $banner)
     {
         if ($request->pic) {
@@ -31,11 +26,6 @@ class BannersController extends Controller
             }
         }
         return redirect()->route('banners.index')->with('danger', '上传失败！');
-    }
-
-    public function edit(Banner $banner)
-    {
-        return view('banners.edit', compact('banner'));
     }
 
     public function update(Request $request, ImageUploadHandler $uploader, Banner $banner)

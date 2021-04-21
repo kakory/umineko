@@ -24,4 +24,4 @@ Route::post('email/resend', 'Auth\VerificationController@resend')->name('verific
 
 Route::resource('users', 'UsersController', ['only' => ['show', 'update', 'edit']]);
 
-Route::resource('banners', 'BannersController');
+Route::resource('banners', 'BannersController', ['only' => ['index', 'store', 'update', 'destroy']]);
